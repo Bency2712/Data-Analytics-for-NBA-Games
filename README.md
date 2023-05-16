@@ -24,18 +24,22 @@ trends to change everyday based on the number of games won/lost.
 which the team was founded, owner, manager, arena capacity, etc.
 
 **Project Rationale**
+
 Player performance: Analyze the statistics of individual players to identify the top
 performers in various categories, such as points per game, assists per game, rebounds per
 game, etc. This could help identify valuable players for fantasy basketball teams or for
 evaluating potential trades.
+
 Team performance: Analyze team statistics to identify which teams are performing well
 overall, as well as which teams excel in specific areas such as defense or scoring. This could
 help you make predictions about which teams will perform well in the playoffs or in future
 seasons.
+
 Player development: By analyzing player statistics over time, we can identify which players
 are improving or declining in performance. This could help teams make decisions about
 which players to invest in, as well as help fans and analysts understand the trajectory of a
 player's career.
+
 Trends and patterns: Analyze the data to identify trends and patterns in player or team
 performance over time, such as changes in playing style or the impact of rule changes. This
 could help you make predictions about future performance or identify areas for further
