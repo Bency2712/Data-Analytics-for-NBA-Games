@@ -1,0 +1,121 @@
+-- Index on the ARENA column
+-- CREATE INDEX idx_teams_arena ON Teams (ARENA);
+
+-- Index on the HEADCOACH column
+-- CREATE INDEX idx_teams_headcoach ON Teams (HEADCOACH);
+
+-- Index on both ABBREVIATION and CITY columns
+-- CREATE INDEX idx_teams_abbrev_city ON Teams (ABBREVIATION, CITY);
+
+-- Index on the PLAYER_NAME column, with case-insensitive search support
+-- CREATE INDEX idx_player_playername_ci ON Player (lower(PLAYER_NAME));
+
+-- Index on the PLAYER_ID column, with DESC ordering for better performance on large tables
+-- CREATE INDEX idx_player_playerid_desc ON Player (PLAYER_ID DESC);
+
+-- Index on both SEASON_ID and CONFERENCE columns
+-- CREATE INDEX idx_ranking_season_conf ON Ranking (SEASON_ID, CONFERENCE);
+
+-- Index on both SEASON_ID and TEAM columns
+-- CREATE INDEX idx_ranking_season_team ON Ranking (SEASON_ID, TEAM);
+
+-- Index on both HOME_TEAM_ID and VISITOR_TEAM_ID columns
+-- CREATE INDEX idx_games_teams ON Games (HOME_TEAM_ID, VISITOR_TEAM_ID);
+
+-- Index on the PTS_HOME column, with DESC ordering
+-- CREATE INDEX idx_games_ptshome_desc ON Games (PTS_HOME DESC);
+
+-- Index on both GAME_ID and TEAM_ID columns
+-- CREATE INDEX idx_gamesdetails_game_team ON Games_Details (GAME_ID, TEAM_ID);
+
+-- Index on both TEAM_ABBREVIATION and TEAM_CITY columns
+-- CREATE INDEX idx_gamesdetails_teamabbr_city ON Games_Details (TEAM_ABBREVIATION, TEAM_CITY);
+
+-- Index on the PTS column, with DESC ordering
+-- CREATE INDEX idx_gamesdetails_pts_desc ON Games_Details (PTS DESC);
+
+-- Index on the OWNER column
+-- CREATE INDEX idx_teams_owner ON Teams (OWNER);
+
+-- Index on the PLAYER_NAME column with prefix search support
+-- CREATE INDEX idx_player_playername_prefix ON Player(PLAYER_NAME);
+
+-- Index on the LOST column
+-- CREATE INDEX idx_ranking_lost ON Ranking (LOST);
+
+-- CREATE INDEX idx_games_team_date ON Games (GAME_DATE_EST, HOME_TEAM_ID, VISITOR_TEAM_ID);
+
+-- CREATE INDEX idx_ranking_season_conf ON Ranking (SEASON_ID, CONFERENCE);
+
+-- CREATE INDEX idx_ranking_season_conf_winpct ON Ranking (SEASON_ID, CONFERENCE, WIN_PERCENT);
+
+-- CREATE INDEX idx_games_details_game_team_pts ON Games_Details (GAME_ID, TEAM_ID, PTS);
+
+-- CREATE INDEX idx_games_season_home ON Games (HOME_TEAM_ID) WHERE SEASON = 2022;
+
+-- CREATE INDEX idx_playerID_conf_pts ON Player (PLAYER_ID) WHERE player_ID >= 500;
+
+-- CREATE INDEX idx_gd_player_pts_date ON Games_Details (PLAYER_ID, PTS, GAME_ID) WHERE GAME_ID BETWEEN '11200005' AND '22200477';
+
+-- CREATE INDEX idx_games_teams_wins ON Games (HOME_TEAM_ID, VISITOR_TEAM_ID, HOME_TEAM_WINS);
+
+-- CREATE INDEX idx_teams_abbreviation ON Teams (ABBREVIATION);
+
+-- Index on the NICKNAME column
+-- CREATE INDEX idx_teams_nickname ON Teams (NICKNAME);
+
+-- Index on the CITY column
+-- CREATE INDEX idx_teams_city ON Teams (CITY);
+
+-- CREATE INDEX idx_player_playername ON Player (PLAYER_NAME);
+
+-- Index on the TEAM_ID column
+-- CREATE INDEX idx_ranking_teamid ON Ranking (TEAM_ID);
+
+-- Index on the SEASON_ID column
+-- CREATE INDEX idx_ranking_seasonid ON Ranking (SEASON_ID);
+
+-- Index on the CONFERENCE column
+-- CREATE INDEX idx_ranking_conference ON Ranking (CONFERENCE);
+
+-- Index on the TEAM column
+-- CREATE INDEX idx_ranking_team ON Ranking (TEAM);
+
+-- CREATE INDEX idx_games_hometeamid ON Games (HOME_TEAM_ID);
+
+-- Index on the VISITOR_TEAM_ID column
+-- CREATE INDEX idx_games_visitorteamid ON Games (VISITOR_TEAM_ID);
+
+-- Index on the SEASON column
+-- CREATE INDEX idx_games_season ON Games (SEASON);
+
+-- Index on the GAME_DATE_EST column
+-- CREATE INDEX idx_games_gamedateest ON Games (GAME_DATE_EST);
+
+-- Index on the GAME_ID column
+-- CREATE INDEX idx_gamesdetails_gameid ON Games_Details (GAME_ID);
+
+-- Index on the TEAM_ID column
+-- CREATE INDEX idx_gamesdetails_teamid ON Games_Details (TEAM_ID);
+
+-- Index on the PLAYER_ID column
+-- CREATE INDEX idx_gamesdetails_playerid ON Games_Details (PLAYER_ID);
+
+-- Index on the PTS column
+--CREATE INDEX idx_gamesdetails_pts ON Games_Details (PTS);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

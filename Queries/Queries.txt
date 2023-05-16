@@ -1,0 +1,143 @@
+1. Show the top 10 players with the most points in a single game and the corresponding date and opponent:
+
+SELECT GD.PLAYER_NAME
+, GD.PTS
+, G.GAME_DATE_EST
+, CASE WHEN G.HOME_TEAM_ID = GD.TEAM_ID THEN T1.CITY ELSE T2.CITY END AS OPPONENT_CITY
+, CASE WHEN G.HOME_TEAM_ID = GD.TEAM_ID THEN T1.ABBREVIATION ELSE T2.ABBREVIATION END AS OPPONENT_ABBREVIATION 
+FROM GAMES_DETAILS GD 
+JOIN GAMES G 
+ON GD.GAME_ID = G.GAME_ID 
+JOIN TEAMS T1 
+ON G.HOME_TEAM_ID = T1.TEAM_ID
+JOIN TEAMS T2 
+ON G.VISITOR_TEAM_ID = T2.TEAM_ID 
+GROUP BY GD.PLAYER_NAME, GD.PTS, G.GAME_DATE_EST, G.HOME_TEAM_ID, GD.TEAM_ID, T1.CITY, T2.CITY, T1.ABBREVIATION, T2.ABBREVIATION
+HAVING GD.PTS > (SELECT MIN(PTS) FROM GAMES_DETAILS)
+ORDER BY GD.PTS DESC
+LIMIT 10;
+
+
+2. Show the teams with the most wins in the last 10 seasons, along with their win percentage:
+
+SELECT TEAM
+, WIN_PERCENT
+, COUNT(*) AS NUM_SEASONS
+FROM ranking
+WHERE SEASON_ID >=
+(SELECT MAX(SEASON_ID) - 9 FROM ranking)
+GROUP BY TEAM, WIN_PERCENT
+HAVING COUNT(*) >= 5
+ORDER BY WIN_PERCENT DESC, NUM_SEASONS DESC
+LIMIT 10;
+
+
+3. Show the players who have played for multiple teams in a single season:
+
+SELECT DISTINCT(P_LIST.PLAYER_NAME), P_LIST.TEAM_ABBREVIATION, P_LIST.GAME_ID 
+FROM 
+(SELECT PLAYER_NAME
+ , TEAM_ABBREVIATION
+ , GAME_ID
+ , COUNT(TEAM_ID) OVER (PARTITION BY GAME_ID, PLAYER_ID) AS NUM_TEAMS
+ FROM GAMES_DETAILS
+) P_LIST
+ WHERE NUM_TEAMS > 1 
+ ORDER BY P_LIST.PLAYER_NAME;
+
+
+4. Show the teams with the highest average points per game at home and away:
+
+SELECT T.CITY
+, ROUND(AVG(CASE WHEN G.HOME_TEAM_ID = T.TEAM_ID THEN GD.PTS ELSE 0 END),2) AS AVG_HOME_POINTS
+, ROUND(AVG(CASE WHEN G.VISITOR_TEAM_ID = T.TEAM_ID THEN GD.PTS ELSE 0 END),2) AS AVG_AWAY_POINTS
+FROM GAMES_DETAILS GD
+JOIN GAMES G ON GD.GAME_ID = G.GAME_ID
+JOIN TEAMS T ON GD.TEAM_ID = T.TEAM_ID
+GROUP BY T.CITY
+ORDER BY avg_home_points DESC, avg_away_points DESC;
+
+
+5. Show the count of the teams that have won at least 60% of their games in total in which they have participated:
+
+SELECT team_id,team,count(WIN_PERCENT) AS MIN_WIN_PCT
+FROM RANKING
+WHERE WIN_PERCENT >= 0.6
+GROUP BY TEAM_ID,TEAM
+
+
+6. Top 20 players with the highest points in the NBA based on the given dataset?    Who is the GOAT?
+
+SELECT PLAYER_NAME, SUM(PTS) AS TOTAL_POINTS
+FROM GAMES_DETAILS
+GROUP BY PLAYER_NAME
+ORDER BY TOTAL_POINTS DESC
+LIMIT 20;
+
+
+7. Retrieve the players with the lowest points per game average for a single season?
+
+
+SELECT 
+    p.PLAYER_NAME, 
+    ROUND(AVG(gd.PTS),2) AS AVG_PTS_PER_GAME, 
+    COUNT(DISTINCT g.GAME_ID) AS GAMES_PLAYED, 
+    g.SEASON
+FROM 
+    Player p 
+    JOIN Games_Details gd ON p.PLAYER_ID = gd.PLAYER_ID
+    JOIN Games g ON gd.GAME_ID = g.GAME_ID
+GROUP BY 
+    p.PLAYER_NAME, g.SEASON
+HAVING 
+    COUNT(DISTINCT g.GAME_ID) >= 20
+ORDER BY 
+    AVG_PTS_PER_GAME ASC
+LIMIT 10;
+
+
+8. Retrieve the players who have averaged at least 20 points per game in every season they have played(minimum of 2 seasons)
+
+
+SELECT p.PLAYER_NAME
+FROM Player p
+WHERE p.PLAYER_ID IN (
+    SELECT gd.PLAYER_ID
+    FROM GAMES_DETAILS gd
+    INNER JOIN GAMES g ON gd.GAME_ID = g.GAME_ID
+    INNER JOIN (
+        SELECT gd.PLAYER_ID, g.SEASON, AVG(gd.PTS) AS AVG_PTS
+        FROM GAMES_DETAILS gd
+        INNER JOIN GAMES g ON gd.GAME_ID = g.GAME_ID
+        GROUP BY gd.PLAYER_ID, g.SEASON
+    ) t ON gd.PLAYER_ID = t.PLAYER_ID AND g.SEASON = t.SEASON
+    GROUP BY gd.PLAYER_ID
+    HAVING MIN(t.AVG_PTS) >= 20 AND COUNT(DISTINCT g.SEASON) >= 2
+);
+
+
+
+9. Retrieve the players who have scored 50 or more points in a game at least 5 times in their career.
+
+
+SELECT p.PLAYER_NAME, COUNT(*) as num_times
+FROM Player p
+JOIN GAMES_DETAILS gd ON p.PLAYER_ID = gd.PLAYER_ID
+WHERE gd.PTS >= 50
+GROUP BY p.PLAYER_NAME
+HAVING COUNT(*) >= 5
+ORDER BY num_times DESC
+
+
+10. Top 5 players with the highest average points per game (PPG) in the last 3 seasons.
+
+
+SELECT t.NICKNAME, ROUND(AVG(g.PTS_HOME),2) AS AVG_PTS_HOME
+FROM Games g
+JOIN Teams t ON g.HOME_TEAM_ID = t.TEAM_ID
+WHERE g.GAME_DATE_EST >= '2020-01-01' AND g.GAME_DATE_EST < '2023-01-01'
+GROUP BY t.NICKNAME
+ORDER BY AVG_PTS_HOME DESC
+LIMIT 5;
+
+

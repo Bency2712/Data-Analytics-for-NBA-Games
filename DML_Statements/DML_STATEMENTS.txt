@@ -1,0 +1,76 @@
+COPY Teams(
+     TEAM_ID
+	,ABBREVIATION
+	,NICKNAME
+	,CITY
+	,ARENA
+	,ARENACAPACITY
+	,OWNER
+	,HEADCOACH
+)
+FROM 'C:\Users\DELL\Documents\Semester1\CIS556\Project\NBA_DATASET\nba_teams.csv'
+DELIMITER ','
+CSV HEADER;
+
+
+COPY Player(
+     PLAYER_ID
+	,PLAYER_NAME
+	,TEAM_ID
+	,SEASON
+)
+FROM 'C:\Users\DELL\Documents\Semester1\CIS556\Project\NBA_DATASET\nba_players.csv'
+DELIMITER ','
+CSV HEADER;
+
+
+
+COPY GAMES(
+     GAME_ID
+	,GAME_DATE_EST
+	,HOME_TEAM_ID
+	,VISITOR_TEAM_ID
+	,SEASON
+	,TEAM_ID_HOME
+	,PTS_HOME
+	,TEAM_ID_AWAY
+	,PTS_AWAY
+	,HOME_TEAM_WINS
+)
+
+FROM 'C:\Users\DELL\Documents\Semester1\CIS556\Project\NBA_DATASET\nba_games.csv'
+DELIMITER ','
+CSV HEADER;
+
+
+
+COPY RANKING(
+     TEAM_ID
+	,SEASON_ID
+	,CONFERENCE
+	,TEAM
+	,GAMES_PLAYED
+	,WON
+	,LOST
+	,WIN_PERCENT
+)
+
+FROM 'C:\Users\DELL\Documents\Semester1\CIS556\Project\NBA_DATASET\nba_ranking.csv'
+DELIMITER ','
+CSV HEADER;
+
+
+
+COPY GAMES_DETAILS(
+	 GAME_ID
+	,TEAM_ID
+	,TEAM_ABBREVIATION
+	,TEAM_CITY
+	,PLAYER_ID
+	,PLAYER_NAME
+	,PTS
+)
+
+FROM 'C:\Users\DELL\Documents\Semester1\CIS556\Project\NBA_DATASET\nba_games_details.csv'
+DELIMITER ','
+CSV HEADER;

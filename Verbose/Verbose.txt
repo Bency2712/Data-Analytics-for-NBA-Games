@@ -1,0 +1,52 @@
+ANALYSE VERBOSE GAMES_DETAILS
+
+INFO:  analyzing "public.games_details"
+INFO:  "games_details": scanned 6228 of 6228 pages, containing 668628 live rows and 0 dead rows; 30000 rows in sample, 668628 estimated total rows
+ANALYZE
+
+Query returned successfully in 593 msec.
+
+
+
+
+ANALYSE VERBOSE GAMES
+
+INFO:  analyzing "public.games"
+INFO:  "games": scanned 222 of 222 pages, containing 26622 live rows and 0 dead rows; 26622 rows in sample, 26622 estimated total rows
+ANALYZE
+
+Query returned successfully in 214 msec.
+
+
+
+
+ANALYSE VERBOSE PLAYER
+
+INFO:  analyzing "public.player"
+INFO:  "player": scanned 17 of 17 pages, containing 2687 live rows and 0 dead rows; 2687 rows in sample, 2687 estimated total rows
+ANALYZE
+
+Query returned successfully in 50 msec.
+
+
+
+
+ANALYSE VERBOSE RANKING
+
+INFO:  analyzing "public.ranking"
+INFO:  "ranking": scanned 2585 of 2585 pages, containing 210342 live rows and 0 dead rows; 30000 rows in sample, 210342 estimated total rows
+ANALYZE
+
+Query returned successfully in 387 msec.
+
+
+
+
+ANALYSE VERBOSE TEAMS
+
+INFO:  analyzing "public.teams"
+INFO:  "teams": scanned 1 of 1 pages, containing 30 live rows and 0 dead rows; 30 rows in sample, 30 estimated total rows
+ANALYZE
+
+Query returned successfully in 45 msec.
+
